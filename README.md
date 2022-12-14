@@ -11,8 +11,8 @@ Project Setup
 ````
 {
     "development": {
-    "username": "root",
-    "password": "StMN@#12http",
+    "username": "Your DB login name",
+    "password": "Your DB Password",
     "database": "Flights_Search_Dev",
     "host": "127.0.0.1",
     "dialect": "mysql"
