@@ -13,7 +13,7 @@ class CityRepository{
         }
     }
 
-    async deleteCity({ cityId }){
+    async deleteCity( cityId ){
         try {
             await City.destroy({where: {id: cityId}})
             return true;
@@ -26,11 +26,17 @@ class CityRepository{
 
     async updateCity( cityId, data ){
         try{
-           const city =  await City.update( data, {
-                where: {
-                    Id: cityId 
-                }
-            })
+            //  The below approach also works but will not return update object as it only supports postgres db
+            // const city = await City.update(data {
+            //    where : {
+            //        id : citiId
+            //    }
+            // })
+
+            //for getting data in mysql we use below approach
+           const city = await City.findByPk(cityId);
+           city.name = data.name;
+           await city.save();
             return city;
         }
         catch( error ){
