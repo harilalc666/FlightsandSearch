@@ -7,6 +7,8 @@ class CityService{
 
     async createCity(data) {
         try {
+            ;
+            console.log("hitting service folder");
             const city = await this.cityrepository.createCity(data);
             
             return city;

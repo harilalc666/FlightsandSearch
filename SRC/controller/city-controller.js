@@ -9,6 +9,7 @@ POST --> ./city
  */
 const create = async (req, res) => {
     try {
+        
         const city = await cityService.createCity(req.body);
         
         return res.status(201).json({
