@@ -4,7 +4,7 @@ const {Port} = require("./config/ServerConfig.js");
 
 const bodyparser = require("body-parser");
 
-const CityRepository = require("./repository/city-repository");
+const CityRepository = require("./repository/index");
 
 const startSetUpServer = async () =>{
 

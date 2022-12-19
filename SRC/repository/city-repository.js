@@ -15,6 +15,7 @@ class CityRepository{
     async deleteCity({ cityId }){
         try {
             await City.destroy({where: {id: cityId}})
+            return true;
         }
         catch(error) {
             console.log("Something went wrong in repository");
@@ -45,9 +46,8 @@ class CityRepository{
         catch( error ){
             console.log("Something went wrong in repository");
             throw{ error }
-        }
-        
+        }  
     }
 }
 
-module.exports = CityRepository;
+// module.exports = CityRepository;
