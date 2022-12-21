@@ -18,7 +18,6 @@ class AirportService{
     }
 
 
-
     async deleteAirport(airportId) {
         try {
             const response = await this.airportrepository.deleteAirport(airportId);
