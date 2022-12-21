@@ -1,12 +1,17 @@
-const {City} = require('../models/index');
+const { Airport } = require('../models/index');
 const { Op } = require('sequelize');
 
-class CityRepository{
-    async createCity( data ){
+
+class AirportRepository{
+    //create api done
+    async createAirport( data ){
         try {  
-            const city = await City.create({ name:data.name });
+            const airport = await Airport.create( {
+                name: data.name, 
+                cityId: data.cityId
+            });
             
-            return city;
+            return airport;
         }
         catch(error) {
             console.log("Something went wrong in repository");
@@ -14,9 +19,14 @@ class CityRepository{
         }
     }
 
-    async deleteCity( cityId ){
+
+    async deleteAirport(airportId){
         try {
-            await City.destroy({where: {id: cityId}})
+            await Airport.destroy({
+                where: {
+                    id: airportId
+                }
+            });
             return true;
         }
         catch(error) {
@@ -25,7 +35,7 @@ class CityRepository{
         }
     }
 
-    async updateCity( cityId, data ){
+    async updateAirport( airportId, {name,cityId}){
         try{
             //  The below approach also works but will not return update object as it only supports postgres db
             // const city = await City.update(data {
@@ -35,10 +45,11 @@ class CityRepository{
             // })
 
             //for getting data in mysql we use below approach
-           const city = await City.findByPk(cityId);
-           city.name = data.name;
-           await city.save();
-            return city;
+           const airport = await Airport.findByPk(airportId);
+           airport.name = name;
+           airport.cityId = cityId;
+           await airport.save();
+            return airport;
         }
         catch( error ){
             console.log("Something went wrong in repository");
@@ -46,10 +57,10 @@ class CityRepository{
         }
     }
 
-    async getCity( cityId ){
+    async getAirport(airportId){
         try{
-            const city = await City.findByPk( cityId );
-            return city;
+            const airport = await Airport.findByPk(airportId);
+            return airport;
         }
         catch( error ){
             console.log("Something went wrong in repository");
@@ -57,20 +68,20 @@ class CityRepository{
         }  
     }
 
-    async getAllCities(filter){
+    async getAllAirports(filter){
         try {
             if(filter.name){
-                const cities = await City.findAll({
+                const airport = await Airport.findAll({
                     where:{
                         name : {
                             [Op.startsWith] : filter.name
                         }
                     }
                 })
-                return cities;
+                return airport;
             }
-            const cities = await City.findAll();
-            return cities;
+            const airport = await Airport.findAll();
+            return airport;
         } catch (error) {
             console.log("Something went wrong in repository");
             throw{ error }
@@ -78,4 +89,4 @@ class CityRepository{
     }
 }
 
-module.exports = CityRepository;
+module.exports = AirportRepository;
