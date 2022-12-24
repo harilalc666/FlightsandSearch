@@ -12,38 +12,38 @@ module.exports = {
      *   isBetaMember: false
      * }], {});
     */
-   await queryInterface.bulkInsert('airplanes',[
-    {
-      Model_number: "Boeing 777-200LR",
-      capacity: 300,
-      createdAt: new Date(),
-      updatedAt: new Date()
-    },
-    {
-      Model_number: "A320-214 CEO",
-      capacity: 250,
-      createdAt: new Date(),
-      updatedAt: new Date()
-    },
-    {
-      Model_number: "Airbus A321",
-      capacity: 350,
-      createdAt: new Date(),
-      updatedAt: new Date()
-    },
-    {
-      Model_number: "Boeing 747-400",
-      capacity: 200,
-      createdAt: new Date(),
-      updatedAt: new Date()
-    },
-    {
-      Model_number: "SpiceJet. VT-SYJ",
-      capacity: 250,
-      createdAt: new Date(),
-      updatedAt: new Date()   
-    }
-   ])
+  //  await queryInterface.bulkInsert('airplanes',[
+  //   {
+  //     Model_number: "Boeing 777-200LR",
+  //     capacity: 300,
+  //     createdAt: new Date(),
+  //     updatedAt: new Date()
+  //   },
+  //   {
+  //     Model_number: "A320-214 CEO",
+  //     capacity: 250,
+  //     createdAt: new Date(),
+  //     updatedAt: new Date()
+  //   },
+  //   {
+  //     Model_number: "Airbus A321",
+  //     capacity: 350,
+  //     createdAt: new Date(),
+  //     updatedAt: new Date()
+  //   },
+  //   {
+  //     Model_number: "Boeing 747-400",
+  //     capacity: 200,
+  //     createdAt: new Date(),
+  //     updatedAt: new Date()
+  //   },
+  //   {
+  //     Model_number: "SpiceJet. VT-SYJ",
+  //     capacity: 250,
+  //     createdAt: new Date(),
+  //     updatedAt: new Date()   
+  //   }
+  //  ])
   },
 
   async down (queryInterface, Sequelize) {

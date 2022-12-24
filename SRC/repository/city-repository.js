@@ -14,6 +14,17 @@ class CityRepository{
         }
     }
 
+    // adding data in multiple format
+    // async createCity( data ){
+    //     try {
+    //         const city = await City.bulkCreate(data, {fields: ['name']});
+    //         return city;
+    //     } catch (error) {
+    //         console.log("Something went wrong in repository");
+    //         throw { error };
+    //     }
+    // }
+
     async deleteCity( cityId ){
         try {
             await City.destroy({where: {id: cityId}})
