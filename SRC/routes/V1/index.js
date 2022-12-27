@@ -1,8 +1,11 @@
 const express = require('express');
+
+const { FlightMiddleware } = require('../../MIDDLEWARES/index');
 const CityController = require('../../controller/city-controller');
 const AirPortController = require('../../controller/airport-controller')
 const AirplaneController = require('../../CONTROLLER/airplane-controller');
 const FlightController = require('../../CONTROLLER/flight-controller');
+
 const router = express.Router();
 
 
@@ -24,7 +27,12 @@ router.get('/airplane/:id', AirplaneController.get);
 router.get('/airplane',AirplaneController.getAll);
 router.patch('/airplane/:id', AirplaneController.update)
 
-router.post('/flight', FlightController.create);
+router.post('/flight',
+    FlightMiddleware.validateCreateFlight,
+    FlightController.create
+    );
+
+console.log("hittind controller");
 router.delete('/flight/:id', FlightController.destroy);
 router.patch('/flight/:id', FlightController.update);
 router.get('/flight/:id', FlightController.get);

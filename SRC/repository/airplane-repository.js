@@ -49,14 +49,12 @@ class AirplaneRepository extends CrudRepository{
     //     }
     // }
 
-    // async getAllAirplane(filter){
+    // async getAll(filter){
     //     try {
     //         if(filter.name){
     //             const airplane = await Airplane.findAll({ where: { name: { [Op.startsWith]: filter.name }}});
     //             return airplane;
-    //         }
-    //        const airplane = await Airplane.findAll();
-    //        return airplane; 
+    //         } 
     //     } 
     //     catch (error) {
     //         console.log("Something went wrong in repository");
@@ -68,6 +66,15 @@ class AirplaneRepository extends CrudRepository{
         super(Airplane);
     }
 }
-
-
 module.exports = AirplaneRepository;
+
+/**
+ * flightNumber,
+ * airplaneId,
+ * departureAirportId,
+ * arrivalAirportId,
+ * arrivalTime,
+ * departureTime,
+ * price,
+ * totalSeats
+ */
