@@ -4,7 +4,7 @@ const flightservice = new FlightService();
 
 const create = async (req,res) => {
     try {   
-        const flight = await flightservice.createFlight(req.body);
+        const flight = await flightservice.create(req.body);
         return res.status(201).json({
             data: flight,
             success: true,
@@ -22,9 +22,39 @@ const create = async (req,res) => {
     }
 }
 
+const destroy = async (req,res) => {
+    try {
+        const response = await flightservice.destroy(req.params.id);
+        return res.status(201).json({
+            data: response,
+            success: true,
+            error: {},
+            message: "Succesfully deleted the flight"
+        })
+    } catch (error) {
+        console.log("Something went wrong in controller layer");
+        throw{ error }
+    }
+}
+
+const update = async (req, res) => {
+    try {
+        const flight = await flightservice.update(req.params.id, req.body);
+        return res.status(201).json({
+            data: flight,
+            success: true,
+            error: {},
+            message: "Succesfully updated the flight" 
+        })
+    } catch (error) {
+        console.log("Something went wrong in controller layer");
+        throw{ error }
+    }
+}
+
 const get = async(req, res) => {
     try {
-        const flight = await flightservice.getFlight(req.params.id);
+        const flight = await flightservice.get(req.params.id);
         return res.status(201).json({
             data: flight,
             success: true,
@@ -44,7 +74,7 @@ const get = async(req, res) => {
 
 const getAll = async (req, res) => {
     try {
-        const response = await flightservice.getAllFlight(req.query);
+        const response = await flightservice.getAll(req.query);
         return res.status(200).json({
             data: response,
             success: true,
@@ -63,5 +93,9 @@ const getAll = async (req, res) => {
 }
 
 module.exports = {
-    create,get,getAll
+    create,
+    get,
+    getAll,
+    destroy,
+    update
 }

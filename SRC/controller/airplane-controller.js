@@ -4,12 +4,12 @@ const airplaneservice = new AirplaneService();
 
 /*
  * 
-POST --> ./city
+POST --> ./airplane
  */
 const create = async (req, res) => {
     try {
         
-        const city = await airplaneservice.createAirplane(req.body);
+        const city = await airplaneservice.create(req.body);
         
         return res.status(201).json({
             data: city,
@@ -30,11 +30,11 @@ const create = async (req, res) => {
 
 /*
  * 
- DELETE --> ./city/:id
+ DELETE --> ./airplane/:id
  */
 const destroy = async (req, res) => {
     try {
-        const response = await airplaneservice.deleteAirplane(req.params.id);
+        const response = await airplaneservice.destroy(req.params.id);
         return res.status(200).json({
             data: response,
             success : true,
@@ -53,11 +53,11 @@ const destroy = async (req, res) => {
 }
 
 /***
- * PATCH --> ./city/:id
+ * PATCH --> ./airplane/:id
  */
 const update = async (req, res) => {
     try {
-        const city = await airplaneservice.updateAirplane(req.params.id, req.body);
+        const city = await airplaneservice.update(req.params.id, req.body);
         return res.status(201).json({
             data: city,
             success : true,
@@ -76,11 +76,11 @@ const update = async (req, res) => {
 }
 
 /**
- * GET --> ./city/:id
+ * GET --> ./airplane/:id
  */
 const get = async (req, res) => {
     try {
-        const response = await airplaneservice.getAirplane(req.params.id);
+        const response = await airplaneservice.get(req.params.id);
         return res.status(200).json({
             data: response,
             success : true,
@@ -100,7 +100,7 @@ const get = async (req, res) => {
 
 const getAll = async (req,res) => {
     try {
-        const cities = await airplaneservice.getAllAirplane(req.query)
+        const cities = await airplaneservice.getAll(req.query)
         return res.status(200).json({
             data: cities,
             success : true,

@@ -3,7 +3,7 @@ class CrudService{
         this.repository = repository;
     }
 
-    async createFlight(data){
+    async create(data){
         try {
             const flight = await this.repository.create(data)
             return flight;
@@ -13,7 +13,7 @@ class CrudService{
         }
     }
 
-    async destroyFlight(dataId){
+    async destroy(dataId){
         try {
             const response = await this.repository.destroy(dataId);
             return response;
@@ -23,7 +23,7 @@ class CrudService{
         }
     }
 
-    async updateFlight(dataId, data){
+    async update(dataId, data){
         try {
             const flight = await this.repository.update(dataId, data);
             return flight;
@@ -33,7 +33,7 @@ class CrudService{
         }
     }
 
-    async getFlight(dataId){
+    async get(dataId){
         try {
             const result = await this.repository.get(dataId);
             return result;
@@ -43,7 +43,7 @@ class CrudService{
         }
     }
 
-    async getAllFlights(){
+    async getAll(){
         try {
             const flightsall = await this.repository.getAll();
             return flightsall;

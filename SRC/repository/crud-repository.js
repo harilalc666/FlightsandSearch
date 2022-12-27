@@ -16,7 +16,11 @@ class CrudRepository{
 
     async destroy(dataId){
         try {
-            const response = await this.model.destroy(dataId);
+            const response = await this.model.destroy({
+                where: {
+                    id: dataId
+                }
+            });
             return response;
         } catch (error) {
             console.log("Soomething went wrong in the crud repository");
@@ -24,16 +28,14 @@ class CrudRepository{
         }
     }
 
-    async update(data, flightId){
+    async update(flightId, data){
         try {
             const flight = await this.model.update(data,{
                 where: {
                     id: flightId
                 }
             });
-
             return flight;
-
         } catch (error) {
             console.log("Soomething went wrong in the crud repository");
             throw{ error } 
