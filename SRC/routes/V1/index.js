@@ -32,7 +32,6 @@ router.post('/flight',
     FlightController.create
     );
 
-console.log("hittind controller");
 router.delete('/flight/:id', FlightController.destroy);
 router.patch('/flight/:id', FlightController.update);
 router.get('/flight/:id', FlightController.get);

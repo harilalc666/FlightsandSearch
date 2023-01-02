@@ -1,5 +1,5 @@
 const {City} = require('../models/index');
-// const { Op } = require('sequelize');
+const { Op } = require('sequelize');
 const CrudRepository = require('./crud-repository');
 
 class CityRepository extends CrudRepository{
@@ -69,10 +69,15 @@ class CityRepository extends CrudRepository{
     //     }  
     // }
 
+
+    constructor(){
+        super(City)
+    }
+
     // async getAllCities(filter){
     //     try {
     //         if(filter.name){
-    //             const cities = await City.findAll({
+    //             const cities = await this.City.findAll({
     //                 where:{
     //                     name : {
     //                         [Op.startsWith] : filter.name
@@ -88,9 +93,26 @@ class CityRepository extends CrudRepository{
     //         throw{ error }
     //     }
     // }
-    constructor(){
-        super(City)
-    }
+    async getAll(filter){
+        try {
+            if(filter.name){
+                const airport = await this.model.findAll({
+                    where:{
+                        name : {
+                            [Op.startsWith] : filter.name
+                        }
+                    }
+                })
+                return airport;
+            }
+            const airport = await this.model.findAll();
+            return airport;
+        } catch (error) {
+            console.log("Something went wrong in repository");
+            throw{ error }
+        }
+    
+    } 
 }
 
 module.exports = CityRepository;

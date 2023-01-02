@@ -1,5 +1,5 @@
-const { Airport } = require('../models/index');
-// const { Op } = require('sequelize');
+const { Airport, City } = require('../models/index');
+const { Op } = require('sequelize');
 const CrudRepository = require('./crud-repository');
 
 
@@ -68,29 +68,40 @@ class AirportRepository extends CrudRepository{
     //     }  
     // }
 
-    // async getAllAirports(filter){
-    //     try {
-    //         if(filter.name){
-    //             const airport = await Airport.findAll({
-    //                 where:{
-    //                     name : {
-    //                         [Op.startsWith] : filter.name
-    //                     }
-    //                 }
-    //             })
-    //             return airport;
-    //         }
-    //         const airport = await Airport.findAll();
-    //         return airport;
-    //     } catch (error) {
-    //         console.log("Something went wrong in repository");
-    //         throw{ error }
-    //     }
-    // }
+
     constructor(){
         super(Airport)
+        
     }
 
+
+    async getAll(filter){
+        try {
+            if(filter.name){
+                const airport = await this.model.findAll({
+                    where:{
+                        name : {
+                            [Op.startsWith] : filter.name
+                        }
+                    }
+                })
+                return airport;
+            }
+            const airport = await this.model.findAll();
+            return airport;
+        } catch (error) {
+            console.log("Something went wrong in repository");
+            throw{ error }
+        }
+    
+    } 
+
+    // Airport.findAll({
+    //     include: [{
+    //       model: City,
+    //       where: { id: cityId }
+    //     }]
+    //   })
 }
 
 module.exports = AirportRepository;

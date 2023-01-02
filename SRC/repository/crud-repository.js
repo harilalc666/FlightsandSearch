@@ -1,4 +1,5 @@
 
+
 class CrudRepository{
     constructor(model){
         this.model = model;
@@ -54,10 +55,11 @@ class CrudRepository{
 
     async getAll(){
         try {
+            console.log("hitting crud repo");
             const result = await this.model.findAll();
             return result;
         } catch (error) {
-            console.log("Soomething went wrong in the crud repository");
+            // console.log("Soomething went wrong in the crud repository");
             throw{ error } 
         }
     }

@@ -5,6 +5,7 @@ class AirportService extends CrudService{
     constructor(){
         const airportrepository = new AirportRepository();
         super(airportrepository)
+    
     }
 
     // async createAirport({name,cityId}) {
@@ -53,9 +54,9 @@ class AirportService extends CrudService{
     //     }
     // }
 
-    // async getAllAirports(filter){
+    // async getAll(filter){
     //     try {
-    //         const airport = await this.airportrepository.getAllAirports({name: filter.name})
+    //         const airport = await airportrepo.getAll(filter)
     //         return airport;
     //     } 
     //     catch (error) {
@@ -64,5 +65,7 @@ class AirportService extends CrudService{
     //     }
     // }
 }
+
+
 
 module.exports = AirportService;

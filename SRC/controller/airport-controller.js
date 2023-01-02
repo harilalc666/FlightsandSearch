@@ -101,7 +101,7 @@ const getAll = async (req,res) => {
         console.log(error);
         return res.status(500).json({
             data: {},
-            message : "Not able to fetch the Airports",
+            message : "Not able to fetch all the Airports",
             success : false,
             error : error
         });

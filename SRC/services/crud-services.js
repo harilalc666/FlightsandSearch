@@ -43,9 +43,10 @@ class CrudService{
         }
     }
 
-    async getAll(){
+    async getAll(filter){
         try {
-            const flightsall = await this.repository.getAll();
+            console.log('hitting crud service');
+            const flightsall = await this.repository.getAll(filter);
             return flightsall;
         } catch (error) {
             console.log("Something went wring in crud repository");

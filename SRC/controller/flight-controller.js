@@ -69,7 +69,7 @@ const get = async(req, res) => {
         return res.status(201).json({
             data: flight,
             success: true,
-            message: "Successfully fetched flight details",
+            message: "Successfully fetched flight details from get request",
             error:{}
         });
     } catch (error) {
@@ -85,6 +85,7 @@ const get = async(req, res) => {
 
 const getAll = async (req, res) => {
     try {
+        console.log('hitting controller');
         const response = await flightservice.getAll(req.query);
         return res.status(200).json({
             data: response,

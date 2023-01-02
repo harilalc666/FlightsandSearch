@@ -1,4 +1,5 @@
 const CrudRepository = require('./crud-repository');
+const { Op } = require('sequelize');
 const { Airplane } = require('../models/index');
 
 class AirplaneRepository extends CrudRepository{
@@ -64,6 +65,27 @@ class AirplaneRepository extends CrudRepository{
 
     constructor(){
         super(Airplane);
+    }
+
+    async getAll(filter){
+        try {
+            if(filter.Model_number){
+                const airport = await this.model.findAll({
+                    where:{
+                        Model_number : {
+                            [Op.startsWith] : filter.Model_number
+                        }
+                    }
+                })
+                return airport;
+            }
+            const airport = await this.model.findAll();
+            return airport;
+        } catch (error) {
+            console.log("Something went wrong in repository");
+            throw{ error }
+        }
+    
     }
 }
 module.exports = AirplaneRepository;

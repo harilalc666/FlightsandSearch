@@ -2,6 +2,7 @@ const CrudService = require('./crud-services');
 const { CityRepository } = require('../repository/index');
 
 class CityService extends CrudService{
+
     constructor(){
         const cityrepository = new CityRepository();
         super(cityrepository);
@@ -50,15 +51,18 @@ class CityService extends CrudService{
     //     }
     // }
 
+       
+
     // async getAllCities(filter){
     //     try {
-    //         const cities = await this.cityrepository.getAllCities({name : filter.name})
+    //         const cities = await cityrepository.getAllCities({name : filter.name})
     //         return cities;
     //     } catch (error) {
     //         console.log("Something went wrong in Service layer");
     //         throw{ error };
     //     }
     // }
+    
 }
 
 module.exports = CityService;

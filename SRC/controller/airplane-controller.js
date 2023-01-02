@@ -100,9 +100,9 @@ const get = async (req, res) => {
 
 const getAll = async (req,res) => {
     try {
-        const cities = await airplaneservice.getAll(req.query)
+        const response = await airplaneservice.getAll(req.query)
         return res.status(200).json({
-            data: cities,
+            data: response,
             success : true,
             message : "Successfully fetched airplane",
             error: {}
