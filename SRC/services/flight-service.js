@@ -32,7 +32,6 @@ const {compareTime} = require('../UTILS/helper');
 
 class FlightService extends CrudService{
     constructor(){
-        console.log('hitting flight service constructor');
         const flightrepository = new FlightRepository();
         super(flightrepository);
     } 

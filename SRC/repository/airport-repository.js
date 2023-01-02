@@ -74,34 +74,57 @@ class AirportRepository extends CrudRepository{
         
     }
 
-
-    async getAll(filter){
-        try {
-            if(filter.name){
-                const airport = await this.model.findAll({
-                    where:{
-                        name : {
-                            [Op.startsWith] : filter.name
-                        }
-                    }
-                })
-                return airport;
-            }
-            const airport = await this.model.findAll();
-            return airport;
-        } catch (error) {
-            console.log("Something went wrong in repository");
-            throw{ error }
-        }
+    // async getAll(filter){
+    //     try {
+    //         if(filter.name){
+    //             const airport = await this.model.findAll({
+    //                 where:{
+    //                     name : {
+    //                         [Op.startsWith] : filter.name
+    //                     }
+    //                 }
+    //             })
+    //             return airport;
+    //         }
+    //         const airport = await this.model.findAll();
+    //         return airport;
+    //     } catch (error) {
+    //         console.log("Something went wrong in repository");
+    //         throw{ error }
+    //     }
     
-    } 
+    // } 
 
-    // Airport.findAll({
-    //     include: [{
-    //       model: City,
-    //       where: { id: cityId }
-    //     }]
-    //   })
+    async getAll(filter) {
+        try {
+          let query = {
+            include: [{
+              model: City
+            }]
+          };
+      
+          if (filter.name) {
+            query.where = {
+              name: {
+                [Op.startsWith]: filter.name
+              }
+            }
+          }
+      
+          if (filter.cityId) {
+            query.include[0].where = {
+              id: filter.cityId
+            }
+          }
+      
+          const airports = await this.model.findAll(query);
+          return airports;
+        } catch (error) {
+          console.log("Something went wrong in repository");
+          throw { error };
+        }
+      }
+
 }
 
 module.exports = AirportRepository;
