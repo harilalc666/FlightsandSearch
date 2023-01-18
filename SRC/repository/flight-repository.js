@@ -27,9 +27,9 @@ class FlightRepository extends CrudRepository{
 //     }
 
  
-
     constructor(){
         super(Flight);
+        
     }
 
         #createFilter(data) {

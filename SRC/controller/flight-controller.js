@@ -2,9 +2,9 @@ const { FlightService } = require('../SERVICES/index');
 
 const flightservice = new FlightService();
 
-const create = async (req,res) => {
+const create = async (req, res) => {
     try {
-        
+
         let filterRequestData = {
             flightNumber: req.body.flightNumber,
             airplaneId: req.body.airplaneId,
@@ -15,25 +15,26 @@ const create = async (req,res) => {
             price: req.body.price,
             totalSeats: req.body.totalSeats
         }
+
         const flight = await flightservice.create(filterRequestData);
         return res.status(201).json({
             data: flight,
             success: true,
             error: {},
-            message: "Succesfully created Flight" 
-        })   
+            message: "Succesfully created Flight"
+        })
     } catch (error) {
         console.log(error);
         return res.status(500).json({
             data: {},
-            message : "Not able to create flight",
-            success : false,
-            error : error
+            message: "Not able to create flight",
+            success: false,
+            error: error
         });
     }
 }
 
-const destroy = async (req,res) => {
+const destroy = async (req, res) => {
     try {
         const response = await flightservice.destroy(req.params.id);
         return res.status(201).json({
@@ -44,7 +45,7 @@ const destroy = async (req,res) => {
         })
     } catch (error) {
         console.log("Something went wrong in controller layer");
-        throw{ error }
+        throw { error }
     }
 }
 
@@ -55,27 +56,27 @@ const update = async (req, res) => {
             data: flight,
             success: true,
             error: {},
-            message: "Succesfully updated the flight" 
+            message: "Succesfully updated the flight"
         })
     } catch (error) {
         console.log("Something went wrong in controller layer");
-        throw{ error }
+        throw { error }
     }
 }
 
-const get = async(req, res) => {
+const get = async (req, res) => {
     try {
         const flight = await flightservice.get(req.params.id);
         return res.status(201).json({
             data: flight,
             success: true,
             message: "Successfully fetched flight details from get request",
-            error:{}
+            error: {}
         });
     } catch (error) {
         console.log(error);
         return res.status(500).json({
-            data:{},
+            data: {},
             message: "Not able to fetch the flights",
             success: false,
             error: error
@@ -85,18 +86,18 @@ const get = async(req, res) => {
 
 const getAll = async (req, res) => {
     try {
-        console.log('hitting controller');
+        
         const response = await flightservice.getAll(req.query);
         return res.status(200).json({
             data: response,
             success: true,
             message: "Successfully fetched flight details",
-            error:{}
+            error: {}
         })
     } catch (error) {
         console.log(error);
         return res.status(500).json({
-            data:{},
+            data: {},
             message: "Not able to fetch the flights",
             success: false,
             error: error

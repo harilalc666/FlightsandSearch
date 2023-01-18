@@ -1,14 +1,35 @@
+const { AirplaneRepository } = require('../repository/index');
+const {compareTime} = require('../UTILS/helper');
+
+const airplaneRepository = new AirplaneRepository();
+
 class CrudService{
     constructor(repository){
         this.repository = repository;
+
     }
 
-    async create(data){
+    // async create(data){
+    //     try {
+    //         const flight = await this.repository.create(data)
+    //         return flight;
+    //     } catch (error) {
+    //         console.log("Something went wring in crud repository");
+    //         throw{ error }
+    //     }
+    // }
+
+    async create(data) {
+
         try {
-            const flight = await this.repository.create(data)
-            return flight;
+            if(!compareTime(data.arrivalTime,data.departureTime)){
+                throw{error: "Arrival time should be greater then departure time"};
+            }
+            const airplanecapa = await airplaneRepository.get(data.airplaneId);
+            const flight = await this.repository.create({...data, totalSeats:airplanecapa.capacity});
+            return flight;         
         } catch (error) {
-            console.log("Something went wring in crud repository");
+            console.log("Something went wrong in service layer");
             throw{ error }
         }
     }
@@ -45,7 +66,7 @@ class CrudService{
 
     async getAll(filter){
         try {
-            console.log('hitting crud service');
+            
             const flightsall = await this.repository.getAll(filter);
             return flightsall;
         } catch (error) {
