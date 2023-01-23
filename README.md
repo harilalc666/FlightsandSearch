@@ -1,20 +1,14 @@
-Welcome to Flights Service
+# Airlines Booking and Management System
 
-Project Setup
+## Table of Contents
 
-* clone the project on your local
-* Execute npm install on the same path as of your root directory of teh downloaded project
-* Create a .env file in the root directory and add the following environment variable
-  + PORT  = 3001
-* Inside the src/config folder create a new file config.json and then add the following piece of json
+[Built with](#Built with)
+[Project Description](#Project Description)
 
-````
-{
-    "development": {
-    "username": "Your DB login name",
-    "password": "Your DB Password",
-    "database": "Flights_Search_Dev",
-    "host": "127.0.0.1",
-    "dialect": "mysql"
-  }
-}
+## Built With
+
+* Node.js
+* Express.js
+
+## Project Description
+This project is an Airlines Booking and Management System that allows users to search for flights, make bookings, and receive reminders about their upcoming flights. The system is built on a microservices architecture and uses an API gateway to handle communication between services.
