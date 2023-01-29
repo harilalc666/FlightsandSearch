@@ -55,7 +55,7 @@ class CrudRepository{
 
     async getAll(){
         try {
-            console.log("hitting crud repo");
+            
             const result = await this.model.findAll();
             return result;
         } catch (error) {

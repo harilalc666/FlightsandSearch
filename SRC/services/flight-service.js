@@ -1,6 +1,7 @@
 const CrudService = require('./crud-services');
 const { FlightRepository } = require('../repository/index');
-
+const {compareTime} = require('../UTILS/helper');
+const { AirplaneRepository } = require('../repository/index');
 // class FlightService{
 
 //     constructor(){
@@ -29,27 +30,28 @@ const { FlightRepository } = require('../repository/index');
 //     }
 // }
 
-
+const airplaneRepository = new AirplaneRepository();
 class FlightService extends CrudService{
-    constructor(repository){
+    constructor(){
         const flightrepository = new FlightRepository();
         super(flightrepository)
     }
     
-    // async create(data) {
+    async create(data) {
 
-    //     try {
-    //         if(!compareTime(data.arrivalTime,data.departureTime)){
-    //             throw{error: "Arrival time should be greater then departure time"};
-    //         }
-    //         const airplanecapa = await airplaneRepository.get(data.airplaneId);
-    //         const flight = await super.create({...data, totalSeats:airplanecapa.capacity});
-    //         return flight;         
-    //     } catch (error) {
-    //         console.log("Something went wrong in service layer");
-    //         throw{ error }
-    //     }
-    // }
+        try {
+            if(!compareTime(data.arrivalTime,data.departureTime)){
+                throw{error: "Arrival time should be greater then departure time"};
+            }
+            const airplanecapa = await airplaneRepository.get(data.airplaneId);
+            const flight = await super.create({...data, totalSeats:airplanecapa.capacity});
+            return flight;         
+        } catch (error) {
+            console.log("Something went wrong in service layer");
+            throw{ error }
+        }
+    }
+    
 
 }
 

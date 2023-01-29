@@ -93,20 +93,27 @@ class CityRepository extends CrudRepository{
     //         throw{ error }
     //     }
     // }
-    async getAll(filter){
+    async getAll(filter, limit = 10, offset = 0){
         try {
             if(filter.name){
-                const airport = await this.model.findAll({
+                const result = await this.model.findAll({
+                    limit,
+                    offset,
                     where:{
                         name : {
                             [Op.startsWith] : filter.name
                         }
                     }
                 })
-                return airport;
+                return result;
             }
-            const airport = await this.model.findAll();
-            return airport;
+
+            const flights = await this.model.findAll({
+                    limit,
+                    offset,
+                    where: filter
+                })
+                return flights;
         } catch (error) {
             console.log("Something went wrong in repository");
             throw{ error }

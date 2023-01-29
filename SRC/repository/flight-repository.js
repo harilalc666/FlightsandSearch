@@ -64,12 +64,14 @@ class FlightRepository extends CrudRepository{
             return filter;
         }
 
-        async getAll(filter){
+        async getAll(filter, limit = 10, offset =0){
             try {
                 
                 const filterObj = this.#createFilter(filter);
                 const flights = await this.model.findAll({
-                where: filterObj
+                    limit,
+                    offset,
+                    where: filterObj
                 })
                 return flights;
             }
